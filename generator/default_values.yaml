@@ -2134,13 +2134,27 @@ extra_tools:
   open_webui:
     enabled: false
     namespace: openwebui
+    webui:
+      persistence:
+        enabled: true
+        size: "10Gi"
+        storageClass: ""
+      extraEnvVars: []
     ollama:
-      version: 0.2.8
-      models:
-      - llama3.1:8b
-    valuesOverrides: {}
+      enabled: false
+      version: 0.3.6
+      replicaCount: 1
+      models: []
+      gpu:
+        enabled: true
+        number: 1
+      persistentVolume:
+        enabled: true
+        size: "200Gi"
+        storageClass: ""
     charts:
       open_webui:
         name: open-webui
-        version: 3.0.9
+        version: 3.1.4
         repository: https://helm.openwebui.com/
+    valuesOverrides: {}

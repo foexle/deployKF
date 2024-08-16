@@ -1,43 +1,29 @@
 open-webui:
   ollama:
+    enabled: {{< .Values.extra_tools.open_webui.ollama.enabled | conv.ToBool >}}
     image:
       tag: {{< .Values.extra_tools.open_webui.ollama.version >}}
+    replicaCount: {{< .Values.extra_tools.open_webui.ollama.replicaCount >}}
     persistentVolume:
-      enabled: true
-      storageClass: "openebs-lvmpv"
-      size: "200Gi"
+      enabled: {{< .Values.extra_tools.open_webui.ollama.persistentVolume.enabled | conv.ToBool >}}
+      storageClass: {{< .Values.extra_tools.open_webui.ollama.persistentVolume.storageClass | quote >}}
+      size: {{< .Values.extra_tools.open_webui.ollama.persistentVolume.size >}}
     updateStrategy:
       type: "Recreate"
     extraEnv:
-      - name: OLLAMA_FLASH_ATTENTION
-        value: "1"
       - name: OLLAMA_KEEP_ALIVE
         value: "-1"
     ollama:
       models: {{< .Values.extra_tools.open_webui.ollama.models >}}
       gpu:
-        enabled: true
-        number: 2
+        enabled: {{< .Values.extra_tools.open_webui.ollama.gpu.enabled | conv.ToBool >}}
+        number: {{< .Values.extra_tools.open_webui.ollama.gpu.number | quote >}}
   ingress:
     enabled: false
   persistence:
     enabled: true
-    storageClass: "openebs-lvmpv"
-  extraEnvVars:
-  - name: ENABLE_OAUTH_SIGNUP
-    value: "true"
-  - name: GOOGLE_CLIENT_ID
-    valueFrom:
-      secretKeyRef:
-        name: openwebui-secret
-        key: google.clientid
-  - name: GOOGLE_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: openwebui-secret
-        key: google.secret
-  - name: ENABLE_SIGNUP
-    value: "true"
+    storageClass: {{< .Values.extra_tools.open_webui.webui.persistence.storageClass | quote >}}
+  extraEnvVars: {{< .Values.extra_tools.open_webui.webui.extraEnvVars | toJSON >}}
 
 ########################################
 ## SHARED | deploykf
