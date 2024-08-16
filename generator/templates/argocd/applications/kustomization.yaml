@@ -95,6 +95,10 @@ resources:
   - kubeflow-tools/volumes--volumes-web-app.yaml
   {{<- end >}}
 
+  {{<- if .Values.kubeflow_tools.kserve.enabled >}}
+  - kubeflow-tools/kserve.yaml
+  {{<- end >}}
+
   #################
   ## extra-tools ##
   #################

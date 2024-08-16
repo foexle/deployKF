@@ -2135,6 +2135,7 @@ extra_tools:
     enabled: false
     namespace: openwebui
     webui:
+      image: {"pullPolicy":"Always","repository":"ghcr.io/open-webui/open-webui","tag":"latest"}
       persistence:
         enabled: true
         size: "10Gi"
