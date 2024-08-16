@@ -80,6 +80,10 @@ deployKF:
     enabled: {{< .Values.extra_tools.open_webui.enabled | conv.ToBool >}}
     namespace: {{< .Values.extra_tools.open_webui.namespace | quote >}}
 
+  monitoring:
+    enabled: {{< .Values.extra_tools.monitoring.enabled | conv.ToBool >}}
+    namespace: {{< .Values.extra_tools.monitoring.namespace | quote >}}
+
 ########################################
 ## DEPENDENCY | istio-gateway
 ########################################

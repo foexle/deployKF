@@ -12,9 +12,13 @@
 - "{{ .Values.deployKF.minio.namespace }}/minio-api.{{ .Values.deployKF.gateway.hostname }}"
 - "{{ .Values.deployKF.minio.namespace }}/minio-console.{{ .Values.deployKF.gateway.hostname }}"
 {{- end }}
-{{- if .Values.deployKF.minio.enabled }}
-## select VirtualServices for Minio API and Console
+{{- if .Values.deployKF.open_webui.enabled }}
+## select VirtualServices for Open WebUI
 - "{{ .Values.deployKF.open_webui.namespace }}/chat.{{ .Values.deployKF.gateway.hostname }}"
+{{- end }}
+{{- if .Values.deployKF.monitoring.enabled }}
+## select VirtualServices for monitoring stack
+- "{{ .Values.deployKF.monitoring.namespace }}/grafana.{{ .Values.deployKF.gateway.hostname }}"
 {{- end }}
 {{- end }}
 

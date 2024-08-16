@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: grafana
+  labels:
+    helm.sh/chart: {{ include "deploykf-monitoring.labels.chart" . }}
+    app.kubernetes.io/name: {{ include "deploykf-monitoring.labels.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: monitoring
+spec:
+  gateways:
+    - {{ .Values.deployKF.gateway.namespace }}/{{ .Values.deployKF.gateway.name }}
+  hosts:
+    - grafana.{{ .Values.deployKF.gateway.hostname }}
+  http:
+    - name: grafana-route
+      route:
+        - destination:
+            host: dkf-extra-tools--mon-grafana.{{ .Release.Namespace }}.svc.{{ .Values.deployKF.clusterDomain }}
+            port:
+              number: 80
