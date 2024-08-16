@@ -7,7 +7,7 @@ cd "$THIS_SCRIPT_PATH"
 
 # upstream configs
 UPSTREAM_REPO="https://github.com/kserve/kserve/"
-UPSTREAM_VERSION="v0.13.0"
+UPSTREAM_VERSION="v0.13.1"
 UPSTREAM_RELEASES_PATH="releases/download/${UPSTREAM_VERSION}"
 
 
