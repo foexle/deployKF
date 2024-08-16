@@ -1,4 +1,8 @@
-prometheus: {}
+prometheus:
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelector: {}
 
 ########################################
 ## SHARED | deploykf
