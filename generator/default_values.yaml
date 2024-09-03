@@ -2143,7 +2143,7 @@ extra_tools:
       extraEnvVars: []
     ollama:
       enabled: false
-      version: 0.3.6
+      version: 0.3.9
       replicaCount: 1
       models: []
       gpu:
@@ -2156,6 +2156,6 @@ extra_tools:
     charts:
       open_webui:
         name: open-webui
-        version: 3.1.4
+        version: 3.1.8
         repository: https://helm.openwebui.com/
     valuesOverrides: {}
