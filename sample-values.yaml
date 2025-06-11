@@ -646,3 +646,17 @@ kubeflow_tools:
   ## --------------------------------------
   volumes:
     enabled: true
+
+  kserve:
+    enabled: true
+    namespace: kserve
+
+extra_tools:
+  nvdp:
+    enabled: true
+  monitoring:
+    enabled: true
+    grafana:
+      enabled: true
+    dcgm-exporter:
+      enabled: true
