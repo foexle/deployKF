@@ -11,7 +11,7 @@ dcgm-exporter:
         nodeSelectorTerms:
         - matchExpressions:
           - key: nvidia.com/gpu.present
-            operator: True
+            operator: Exists
 ########################################
 ## SHARED | deploykf
 ########################################
