@@ -1,0 +1,55 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: llama31-8b-instruct-vllm-8192
+  namespace: mirantis-ml-profile
+  annotations:
+    serving.kserve.io/enable-prometheus-scraping: "true"
+    sidecar.istio.io/inject: "false"
+    serving.kserve.io/autoscalerClass: external
+    serving.kserve.io/deploymentMode: RawDeployment
+spec:
+  predictor:
+    deploymentStrategy:
+      type: Recreate
+    model:
+      args:
+      - --model_id=neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8
+      - --max-model-len=8192
+      - --download-dir=/modeldl
+      - --disable-custom-all-reduce
+      livenessProbe:
+        failureThreshold: 10
+        httpGet:
+          path: /v1/models/llama31-8b-instruct-vllm-8192
+          port: 8080
+        initialDelaySeconds: 150
+      modelFormat:
+        name: huggingface
+      name: llama31-8b-instruct-vllm-8192
+      readinessProbe:
+        failureThreshold: 10
+        httpGet:
+          path: /v1/models/llama31-8b-instruct-vllm-8192
+          port: 8080
+        initialDelaySeconds: 150
+      resources:
+        limits:
+          memory: 32Gi
+          nvidia.com/gpu: "1"
+      volumeMounts:
+      - mountPath: /dev/shm
+        name: dshm
+      - mountPath: /modeldl
+        name: modeldl-pvc
+    securityContext:
+      fsGroup: 1000
+      runAsUser: 1000
+    volumes:
+    - emptyDir:
+        medium: Memory
+        sizeLimit: 16Gi
+      name: dshm
+    - name: modeldl-pvc
+      persistentVolumeClaim:
+        claimName: model-pvc

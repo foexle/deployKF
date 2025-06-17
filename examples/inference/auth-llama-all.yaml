@@ -1,0 +1,17 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: llama-allow-all
+  namespace: mirantis-ml-profile
+spec:
+  action: ALLOW
+  rules:
+  - to:
+    - operation:
+        methods:
+        - GET
+        - POST
+        - HEAD
+  selector:
+    matchLabels:
+      app: llama3-predictor-00001

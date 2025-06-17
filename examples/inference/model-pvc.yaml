@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: modeldl-pvc
+spec:
+  storageClassName: ebs-csi-default-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 90Gi
