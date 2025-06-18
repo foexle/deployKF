@@ -103,6 +103,12 @@ centralDashboard:
             text: Executions
             link: "/pipeline/#/executions"
       {{<- end >}}
+      {{<- if .Values.kubeflow_tools.kserve.enabled >}}
+      - type: item
+        text: Models
+        icon: kubeflow:models
+        link: "/kserve-endpoints/"
+      {{<- end >}}
 
     ## external links that appear in the sidebar
     ##
